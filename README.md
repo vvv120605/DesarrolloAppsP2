@@ -1,9 +1,9 @@
 # WIM 100 — Postulación y evaluación
 
 Aplicación móvil Android desarrollada en Kotlin para digitalizar el proceso de postulación, revisión y evaluación de candidatas al programa **WIM 100 – DYM Cyber**.
-
-El proyecto se desarrolla para la asignatura **DSY1105 — Desarrollo de Aplicaciones Móviles**, de Duoc UC, como parte de la Evaluación Parcial 2.
-
+WIM 100 es una aplicación móvil desarrollada para Android que busca apoyar la gestión de procesos de postulación y evaluación de candidatas. El proyecto se enfoca en centralizar la información de las postulantes, facilitar la evaluación de sus antecedentes y permitir la consulta de los resultados obtenidos.
+La aplicación utiliza tecnologías del ecosistema Android y una arquitectura modular que permite organizar la interfaz, la lógica de negocio y el acceso a los datos. Además, contempla validaciones de formularios y persistencia local para contribuir a un funcionamiento ordenado y consistente.
+Para fines de desarrollo y pruebas, se pueden utilizar datos ficticios, evitando depender de información real de postulantes.
 La aplicación permite registrar y consultar candidaturas, revisar antecedentes, aplicar una matriz de evaluación, consultar resultados consolidados y mantener un historial de las operaciones realizadas.
 
 > **Proyecto académico:** todos los datos utilizados son ficticios o sintéticos. La aplicación no se conecta a la API real de LinkedIn y la matriz de evaluación es provisional, sujeta a validación del socio formador.
