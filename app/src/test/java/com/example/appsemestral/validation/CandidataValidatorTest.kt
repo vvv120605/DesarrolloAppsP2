@@ -76,4 +76,39 @@ class CandidataValidatorTest {
     fun telefono_se_formatea() {
         assertEquals("+56 9 1234 5678", CandidataValidator.formatearTelefono("56912345678"))
     }
+
+
+    @Test
+    fun area_es_obligatoria() {
+        assertFalse(CandidataValidator.validarArea(null).esValido)
+        assertFalse(CandidataValidator.validarArea("").esValido)
+        assertTrue(CandidataValidator.validarArea("Desarrollo").esValido)
+    }
+
+    @Test
+    fun resumen_debe_respetar_los_limites() {
+        assertFalse(CandidataValidator.validarResumen("").esValido)
+        assertFalse(CandidataValidator.validarResumen("Muy breve").esValido)
+        assertTrue(CandidataValidator.validarResumen("A".repeat(30)).esValido)
+        assertTrue(CandidataValidator.validarResumen("A".repeat(500)).esValido)
+        assertFalse(CandidataValidator.validarResumen("A".repeat(501)).esValido)
+    }
+
+    @Test
+    fun nombre_debe_respetar_los_limites() {
+        assertTrue(CandidataValidator.validarNombre("Ana Pérez").esValido)
+        assertFalse(CandidataValidator.validarNombre("A").esValido)
+        assertFalse(CandidataValidator.validarNombre("A".repeat(61) + " Pérez").esValido)
+    }
+
+    @Test
+    fun cv_de_5mb_es_valido() {
+        assertTrue(
+            CandidataValidator.validarCv(
+                "cv.pdf",
+                CandidataValidator.CV_MAX_BYTES
+            ).esValido
+        )
+    }
+
 }
