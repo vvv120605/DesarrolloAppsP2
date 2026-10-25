@@ -2,29 +2,35 @@ package com.example.appsemestral.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Identidad WIM 100: violeta (liderazgo femenino) + turquesa (tecnología/seguridad)
-val Violeta10 = Color(0xFF22005D)
-val Violeta40 = Color(0xFF6A3DB8)
-val Violeta80 = Color(0xFFD0BCFF)
-val Violeta90 = Color(0xFFEADDFF)
-val Violeta30 = Color(0xFF4F2A9C)
 
-val Turquesa10 = Color(0xFF002020)
-val Turquesa40 = Color(0xFF00696E)
-val Turquesa80 = Color(0xFF4CD9DF)
-val Turquesa90 = Color(0xFF6FF6FC)
-val Turquesa30 = Color(0xFF004F53)
+val FondoPremium = Color(0xFF0F0D15)
+val Superficie = Color(0xFF14111C)
+val SuperficieMuyBaja = Color(0xFF0B0911)
+val SuperficieBaja = Color(0xFF181521)
+val SuperficieMedia = Color(0xFF1D1928)
+val SuperficieAlta = Color(0xFF252032)
+val SuperficieMuyAlta = Color(0xFF2D2740)
 
-val Magenta40 = Color(0xFF9C2E7A)
-val Magenta80 = Color(0xFFFFAEDD)
-val Magenta90 = Color(0xFFFFD8EC)
-val Magenta10 = Color(0xFF3D0030)
-val Magenta30 = Color(0xFF7D1461)
 
-val Fondo = Color(0xFFFDF8FF)
-val FondoOscuro = Color(0xFF15121B)
+val Lavanda = Color(0xFFCDB8FF)
+val SobreLavanda = Color(0xFF2A1A55)
+val LavandaContenedor = Color(0xFF3B2A70)
+val SobreLavandaContenedor = Color(0xFFE9DDFF)
+val LavandaGris = Color(0xFFB9AFD6)
+val SobreLavandaGris = Color(0xFF2D2645)
+val LavandaGrisContenedor = Color(0xFF3A3352)
+val SobreLavandaGrisContenedor = Color(0xFFE5DEFF)
 
-// Colores semánticos de estado
-val VerdeExito = Color(0xFF2E7D32)
-val VerdeExitoContenedor = Color(0xFFC8E6C9)
-val AmbarAviso = Color(0xFFF9A825)
+val LilaRosado = Color(0xFFD9B3E8)
+val SobreLilaRosado = Color(0xFF3A1F49)
+val LilaRosadoContenedor = Color(0xFF4A2F5A)
+val SobreLilaRosadoContenedor = Color(0xFFF6DCFF)
+
+val TextoPrincipal = Color(0xFFE8E3F0)
+val TextoSecundario = Color(0xFFC9C2D6)
+val Borde = Color(0xFF948DA3)
+val BordeSuave = Color(0xFF3F3A4D)
+
+val VerdeExito = Color(0xFF7FD99A)
+val VerdeExitoContenedor = Color(0xFF12301F)
+val AmbarAviso = Color(0xFFF2C14E)

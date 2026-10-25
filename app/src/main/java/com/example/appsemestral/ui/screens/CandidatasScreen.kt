@@ -91,7 +91,9 @@ fun CandidatasScreen(
                     onClick = onNueva,
                     expanded = fabExpandido,
                     icon = { Icon(Icons.Filled.Add, contentDescription = null) },
-                    text = { Text("Nueva candidatura") }
+                    text = { Text("Nueva candidatura")},
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
