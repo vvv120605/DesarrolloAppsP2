@@ -12,8 +12,8 @@ La aplicación permite registrar y consultar candidaturas, revisar antecedentes,
 
 | Integrante | Usuario de GitHub | Responsabilidades |
 |---|---|---|
-| Vanessa Roberson | @usuario1 | Issues #1, #3, #4, #5, #9 |
-| David Navarrete | @usuario2 | Issues #2, #6, #7, #8 |
+| Vanessa Roberson | @vvv120605 | Issues #1, #3, #4, #5, #9 |
+| David Navarrete | @daaaavvvvv | Issues #2, #6, #7, #8 |
 
 **Repositorio:** https://github.com/vvv120605/DesarrolloAppsP2
 
