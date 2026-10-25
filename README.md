@@ -1,102 +1,193 @@
-# WIM 100 · Postulación y evaluación (MVP Android)
+# WIM 100 — Postulación y evaluación
 
-Aplicación Android en **Kotlin + Jetpack Compose (Material Design 3)** que digitaliza el flujo de
-postulación y evaluación del programa **WIM 100 – DYM Cyber**. Proyecto de la asignatura
-**DSY1105 Desarrollo de Aplicaciones Móviles** (Duoc UC), Evaluación Parcial 2.
+Aplicación móvil Android desarrollada en Kotlin para digitalizar el proceso de postulación, revisión y evaluación de candidatas al programa **WIM 100 – DYM Cyber**.
 
-> ⚠️ MVP académico. Todos los datos son **ficticios/sintéticos**. No se integra la API real de LinkedIn
-> y la matriz de evaluación es **provisional**, sujeta a validación del Socio Formador.
+El proyecto se desarrolla para la asignatura **DSY1105 — Desarrollo de Aplicaciones Móviles**, de Duoc UC, como parte de la Evaluación Parcial 2.
 
-## Integrantes
+La aplicación permite registrar y consultar candidaturas, revisar antecedentes, aplicar una matriz de evaluación, consultar resultados consolidados y mantener un historial de las operaciones realizadas.
 
-| Nombre | Usuario GitHub | Responsabilidades principales |
+> **Proyecto académico:** todos los datos utilizados son ficticios o sintéticos. La aplicación no se conecta a la API real de LinkedIn y la matriz de evaluación es provisional, sujeta a validación del socio formador.
+
+## 1. Integrantes del equipo
+
+| Integrante | Usuario de GitHub | Responsabilidades |
 |---|---|---|
-| _Nombre Apellido 1_ | _@usuario1_ | _completar_ |
-| _Nombre Apellido 2_ | _@usuario2_ | _completar_ |
+| Vanessa Roberson | @usuario1 | Issues #1, #3, #4, #5, #9 |
+| David Navarrete | @usuario2 | Issues #2, #6, #7, #8 |
 
-Tablero Trello: _enlace_
+**Repositorio:** https://github.com/vvv120605/DesarrolloAppsP2
 
-## Funcionalidades
+## 2. Funcionalidades principales
 
-| Requisito del caso | Implementación |
+### Gestión de candidaturas
+- Registrar nuevas candidatas mediante un formulario con validaciones.
+- Consultar candidaturas registradas.
+- Buscar candidatas y filtrar por estado.
+- Consultar antecedentes, experiencia, CV en PDF y enlace ficticio al perfil profesional.
+
+### Evaluación
+- Evaluar candidatas mediante cinco criterios ponderados.
+- Asignar puntajes de 1 a 5 por criterio.
+- Calcular el puntaje ponderado y mostrar el resultado sobre 100 puntos.
+- Solicitar justificación cuando un criterio recibe una puntuación igual o inferior a 2.
+- Registrar observaciones generales y el nombre de la evaluadora.
+- Evitar evaluaciones duplicadas para una misma candidata y evaluadora.
+
+### Resultados y seguimiento
+- Consultar resultados consolidados y rankings por promedio.
+- Gestionar estados de candidatura: postulada, en evaluación, evaluada, seleccionada y no seleccionada.
+- Registrar eventos relevantes en un historial, como evaluaciones, consultas y resoluciones.
+- Consultar los resultados según el rol de la persona usuaria.
+
+### Perfiles de usuario
+- **Evaluadora:** registra candidaturas y realiza evaluaciones.
+- **Dirección:** consulta resultados y resuelve candidaturas.
+
+## 3. Tecnologías utilizadas
+
+| Tecnología | Uso |
 |---|---|
-| Registrar / consultar candidaturas | Formulario validado + lista con búsqueda y filtro por estado |
-| Revisar antecedentes | CV en PDF (visor integrado), experiencia y enlace ficticio a perfil profesional |
-| Matriz de criterios | 5 criterios ponderados (pesos suman 100 %), puntaje 1–5, total 0–100 en vivo |
-| Puntajes, observaciones y evaluadora | Observación por criterio (obligatoria si el puntaje es ≤ 2) + observación general; se guarda el nombre de la evaluadora |
-| Evitar evaluaciones duplicadas | Verificación en el Repository **y** índice único `(candidataId, evaluadoraClave)` en Room |
-| Trazabilidad | Tabla `historial`: inicio/cierre de sesión, registro, evaluación, intento duplicado, resolución, consulta de CV/perfil, compartir |
-| Estado y resultados consolidados | Estados Postulada → En evaluación → Evaluada (≥ 2 evaluaciones) → Seleccionada / No seleccionada; ranking por promedio |
-| Perfiles | **Evaluadora** (registra y evalúa) y **Dirección** (consulta y resuelve) |
+| Kotlin 2.2.10 | Lenguaje de programación |
+| Android SDK | Desarrollo de la aplicación Android |
+| Jetpack Compose | Construcción declarativa de interfaces |
+| Material Design 3 | Componentes y diseño visual |
+| Navigation Compose 2.9.8 | Navegación entre pantallas |
+| ViewModel y StateFlow | Gestión del estado y arquitectura MVVM |
+| Room 2.8.4 | Persistencia local mediante SQLite |
+| KSP | Procesamiento de anotaciones de Room |
+| Gradle 9.4.1 | Construcción y gestión del proyecto |
+| Android Gradle Plugin 9.2.1 | Integración de Android con Gradle |
+| JUnit 4.13.2 | Pruebas unitarias |
 
-## Requisitos técnicos (rúbrica) → dónde está en el código
+Las versiones corresponden a las declaradas en la configuración del proyecto.
 
-| Requisito | Archivos |
-|---|---|
-| Interfaz M3 y navegación | `ui/theme/*`, `navigation/WimNavHost.kt`, `ui/WimApp.kt` (barra inferior) |
-| Formularios con ícono y error visual | `ui/components/CampoValidado.kt`, `ui/screens/CandidataFormScreen.kt`, `EvaluacionScreen.kt` |
-| Validación fuera de los composables | `validation/CandidataValidator.kt`, `validation/EvaluacionValidator.kt`, ViewModels |
-| Animaciones | Transiciones del NavHost, `sacudir()` en botones con error, selector de puntaje con rebote (spring), `PuntajeCircular` animado, `animateItem()` en listas, tarjetas expandibles (`animateContentSize`), escudo con pulso infinito, barras de ranking que crecen |
-| MVVM | `model/` · `data/local/` (Room) · `data/repository/` · `ui/viewmodel/` · `ui/screens/` + `ui/components/` |
-| Persistencia Room | `data/local/WimDatabase.kt`, `data/local/dao/*`, `data/local/DatosSemilla.kt` |
-| Recursos nativos (4) | `nativo/` → ver tabla siguiente |
+## 4. Requisitos técnicos
 
-### Recursos nativos y permisos
+### Requisitos de desarrollo
 
-| Recurso | Permiso | Gestión |
-|---|---|---|
-| **Biometría / credencial del dispositivo** (ingreso) | `USE_BIOMETRIC` (normal) | Se consulta `BiometricManager.canAuthenticate`; si no hay bloqueo configurado, se informa y se permite ingresar |
-| **Notificaciones locales** (al registrar una evaluación) | `POST_NOTIFICATIONS` (en tiempo de ejecución, Android 13+) | Diálogo explicativo → diálogo del sistema; si se rechaza, la app sigue funcionando y Perfil ofrece abrir Ajustes |
-| **Selector de documentos + PdfRenderer** (CV) | Ninguno (Storage Access Framework) | Solo se accede al PDF elegido; se persiste el permiso de lectura del URI |
-| **Intents** (abrir perfil, abrir PDF con otra app, compartir) | Ninguno | Se controla `ActivityNotFoundException` |
+- **Sistema operativo:** Windows, macOS o Linux compatible con Android Studio.
+- **IDE:** Android Studio.
+- **Lenguaje:** Kotlin.
+- **JDK:** versión 21, según la configuración del proyecto.
+- **Sistema de construcción:** Gradle mediante el Gradle Wrapper incluido en el repositorio.
+- **SDK de Android:** instalar las plataformas y herramientas requeridas por la configuración del proyecto.
+- **Dispositivo de ejecución:** emulador Android o dispositivo físico compatible.
+- **Conectividad:** acceso a internet para descargar las dependencias durante la primera sincronización.
 
-La pantalla **Perfil** muestra el estado real de cada permiso y permite probar cada recurso (útil para la defensa).
+### Requisitos de la aplicación
 
-## Arquitectura
+- **Plataforma:** Android.
+- **Versión mínima de Android:** API 24
+- **Almacenamiento:** base de datos local Room sobre SQLite.
+- **Conexión a servicios externos:** la aplicación utiliza datos ficticios para fines académicos y no requiere conexión a una API real de LinkedIn.
 
+### Verificación de configuración
+
+Antes de la entrega, confirmar estos valores en los archivos del proyecto:
+
+- `app/build.gradle.kts`: `minSdk`, `compileSdk`, `targetSdk` y configuración de pruebas.
+- `gradle/libs.versions.toml` o archivos de versiones equivalentes: versiones de las dependencias.
+- `gradle/wrapper/gradle-wrapper.properties`: versión de Gradle utilizada.
+
+Los valores documentados deben coincidir con la configuración real del repositorio.
+
+## 5. Arquitectura del proyecto
+
+La aplicación utiliza **MVVM (Model–View–ViewModel)** para separar la interfaz, el estado y la lógica de negocio.
+
+El código fuente se organiza en los siguientes paquetes:
+
+- `model/`: entidades, estados, evaluaciones y cálculos de puntaje.
+- `data/local/`: base de datos Room, DAO, convertidores y datos sintéticos iniciales.
+- `data/repository/`: acceso a los datos y operaciones de candidaturas, evaluaciones e historial.
+- `validation/`: validadores independientes de la interfaz.
+- `ui/screens/`: pantallas de la aplicación.
+- `ui/components/`: componentes visuales reutilizables.
+- `ui/viewmodel/`: gestión del estado y comunicación entre la interfaz y los repositorios.
+- `navigation/`: rutas y navegación entre pantallas.
+- `nativo/`: integración con funciones nativas de Android.
+- `di/`: configuración e inicialización de dependencias.
+- `ui/theme/`: colores, tipografía y tema visual.
+
+### Flujo de datos
+
+La pantalla observa el estado del ViewModel. El ViewModel procesa las acciones del usuario, aplica las validaciones necesarias y delega las operaciones de datos al repositorio. El repositorio utiliza los DAO de Room para consultar o modificar la base de datos local. Los cambios se reflejan en la interfaz mediante flujos reactivos.
+
+## 6. Persistencia y datos de prueba
+
+La aplicación utiliza Room (biblioteca en android) para almacenar localmente candidaturas, criterios, evaluaciones e historial.
+Se incluyen datos sintéticos iniciales para facilitar las pruebas y la demostración de funcionalidades sin tener que registrar todos los datos manualmente.
+La persistencia local permite consultar los registros guardados después de cerrar y volver a abrir la aplicación.
+
+## 7. Recursos nativos de Android
+
+La aplicación integra las siguientes funciones del dispositivo:
+
+- **Biometría o credencial del dispositivo:** permite comprobar la disponibilidad de autenticación biométrica o mediante credencial.
+- **Notificaciones locales:** informa sobre eventos de evaluación y gestiona el permiso de notificaciones en versiones compatibles de Android.
+- **Selector de documentos y visor PDF:** permite seleccionar y consultar archivos PDF utilizando el selector del sistema.
+- **Intents:** permite abrir recursos compatibles con otras aplicaciones y compartir información.
+
+La pantalla de perfil permite consultar el estado de los permisos y probar las funciones nativas disponibles.
+
+## 8. Requisitos para ejecutar el proyecto
+
+Antes de abrir el proyecto, se recomienda contar con:
+
+- Android Studio compatible con la configuración del proyecto.
+- JDK 21.
+- Android SDK y las herramientas necesarias para compilar la aplicación.
+- Un emulador Android o un dispositivo compatible con API 24 o superior.
+- Conexión a internet durante la primera sincronización, para descargar Gradle y las dependencias necesarias.
+
+## 9. Cómo abrir y ejecutar la aplicación
+
+1. Clonar el repositorio o descargarlo desde GitHub.
+2. Descomprimir el proyecto si se descargó como archivo ZIP.
+3. Abrir Android Studio y seleccionar **File → Open**.
+4. Elegir la carpeta raíz que contiene `settings.gradle.kts`.
+5. Esperar a que termine la sincronización de Gradle.
+6. Crear o iniciar un dispositivo virtual Android compatible, o conectar un dispositivo físico con la depuración habilitada.
+7. Seleccionar la configuración de ejecución `app`.
+8. Pulsar **Run** para compilar e iniciar la aplicación.
+
+No se debe abrir únicamente la carpeta 'app', ya que la configuración principal de Gradle está en la raíz del proyecto!!
+
+## 9. Cómo ejecutar las pruebas automáticas
+
+Las pruebas unitarias se encuentran en:
+
+`app/src/test/java/com/example/appsemestral/`
+
+Incluyen pruebas de:
+
+- Validación de los datos de las candidatas.
+- Validación de puntajes y observaciones de las evaluaciones.
+- Cálculo del puntaje ponderado y normalización de claves de evaluadoras.
+
+### En Windows
+
+Abrir una terminal en la carpeta raíz del proyecto y ejecutar:
+
+```powershell
+.\gradlew.bat test
 ```
-com.example.appsemestral
-├── model/              Entidades Room, enums y reglas de negocio puras (CalculadoraPuntaje)
-├── data/
-│   ├── local/          WimDatabase, Converters, DAOs (dao/), DatosSemilla (datos sintéticos)
-│   └── repository/     CandidataRepository, EvaluacionRepository (transacción + anti-duplicados), HistorialRepository
-├── validation/         Validadores en Kotlin puro (testeables sin emulador)
-├── navigation/         Rutas y NavHost con transiciones animadas
-├── nativo/             Biometría, notificaciones, archivos/PDF, intents, UI de permisos
-├── di/                 AppContainer (inyección de dependencias manual)
-└── ui/
-    ├── viewmodel/      Estado con StateFlow + AppViewModelProvider (fábrica)
-    ├── screens/        Pantallas (Composables)
-    ├── components/     Componentes reutilizables (CampoValidado, PuntajeCircular…)
-    └── theme/          Material Design 3 (colores, tipografía, tema claro/oscuro)
-```
 
-Flujo de datos: **Screen** (observa `StateFlow` con `collectAsStateWithLifecycle`) → llama funciones del
-**ViewModel** → el ViewModel valida y llama al **Repository** → el Repository usa los **DAO** de Room →
-Room emite un nuevo `Flow` → la UI se recompone sola.
+## 10. Para la demostración
 
-## Cómo ejecutar
+Para revisar las funcionalidades:
 
-1. Android Studio reciente (compatible con AGP 9.2) con JDK 21 (el que trae Android Studio).
-2. `File > Open` y elegir la carpeta del proyecto. Esperar la sincronización de Gradle
-   (AGP 9.2.1, Kotlin 2.2.10, KSP 2.2.10-2.0.2, Room 2.8.4, Gradle 9.4.1).
-3. Ejecutar en un emulador con **API 24+** (recomendado API 34 o superior con Google Play).
-4. Para probar la biometría en el emulador: Ajustes → Seguridad → configurar un PIN y una huella
-   (en el panel *Extended controls → Fingerprint* se simula el toque).
-5. Tests unitarios de validación: `./gradlew test`.
+1. Ingresar con un perfil de evaluadora.
+2. Probar las validaciones del formulario de candidatura.
+3. Consultar los antecedentes y el CV de una candidata.
+4. Registrar una evaluación y revisar el resultado calculado.
+5. Comprobar el bloqueo de evaluaciones duplicadas.
+6. Consultar el historial y los resultados consolidados.
+7. Ingresar con el perfil de Dirección para revisar y resolver candidaturas.
+8. Cerrar y volver a abrir la aplicación para comprobar la persistencia local.
 
-### Datos de prueba precargados
+Las pruebas deben realizarse con datos ficticios. La disponibilidad de cada recurso nativo puede depender de la configuración del dispositivo o emulador.
 
-- 6 candidatas sintéticas con CV de prueba en PDF generado por la app.
-- Evaluaciones de **“Evaluadora Demo Uno”** y **“Evaluadora Demo Dos”**.
-  Ingresa como *Evaluadora Demo Uno* y abre a *Ignacia Valdés Soto* para ver el bloqueo de duplicados.
-- Ingresa como **Dirección** para resolver candidaturas con estado *Evaluada*.
+---
 
-## Guion sugerido para la demo
-
-1. Ingresar como Evaluadora (biometría) → aceptar notificaciones.
-2. Registrar una candidata con datos inválidos (ver íconos y mensajes) y luego válidos (adjuntar PDF).
-3. Abrir la candidata → ver CV y perfil → evaluar (puntaje ≤ 2 exige justificación) → notificación.
-4. Intentar evaluar de nuevo → bloqueo de duplicado (queda en el historial).
-5. Cerrar sesión, entrar como Dirección → Resultados → resolver → compartir ranking.
-6. Cerrar y reabrir la app: los datos siguen ahí (Room).
+**Proyecto académico — DSY1105, Duoc UC.**
